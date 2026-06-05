@@ -15,7 +15,7 @@ class RepositoryImpl @Inject constructor(): Repository {
     override val products: StateFlow<List<Product>> = _product.asStateFlow()
 
 
-   override fun addToCard(id: Int) {
+   override fun addToCart(id: Int) {
        _product.value = _product.value
    }
 
