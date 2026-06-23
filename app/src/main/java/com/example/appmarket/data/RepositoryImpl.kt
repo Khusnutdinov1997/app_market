@@ -1,5 +1,6 @@
 package com.example.appmarket.data
 
+import com.example.appmarket.R
 import com.example.appmarket.model.Product
 import com.example.appmarket.model.Size
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +15,11 @@ import javax.inject.Singleton
 @Singleton
 class RepositoryImpl @Inject constructor() : Repository {
 
-    private val _products = MutableStateFlow<List<Product>>(
+    private val _products = MutableStateFlow(
         listOf(
             Product(
                 id = 1,
-                imageURl = 0,
+                imageURl = R.drawable.img,
                 label = "Кроссовки",
                 overView = "Описание товара...",
                 price = 5000,
@@ -26,7 +27,7 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 2,
-                imageURl = 0,
+                imageURl = R.drawable.img_1,
                 label = "Худи",
                 overView = "Описание товара...",
                 price = 2000,
@@ -34,7 +35,7 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 3,
-                imageURl = 0,
+                imageURl = R.drawable.img_2,
                 label = "Джинсы",
                 overView = "Описание товара...",
                 price = 3000,
@@ -42,12 +43,28 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 4,
-                imageURl = 0,
+                imageURl = R.drawable.img_3,
                 label = "Футболка",
                 overView = "Описание товара...",
                 price = 1000,
                 size = Size.L
             ),
+            Product(
+                id = 5,
+                imageURl = R.drawable.img_4,
+                label = "Футболка",
+                overView = "Описание товара...",
+                price = 1000,
+                size = Size.L
+            ),
+            Product(
+                id = 6,
+                imageURl = R.drawable.img_5,
+                label = "Футболка",
+                overView = "Описание товара...",
+                price = 1000,
+                size = Size.L
+            )
         )
     )
     override val products: StateFlow<List<Product>> = _products.asStateFlow()
@@ -56,7 +73,7 @@ class RepositoryImpl @Inject constructor() : Repository {
         listOf(
             Product(
                 id = 1,
-                imageURl = 0,
+                imageURl = R.drawable.img,
                 label = "Кроссовки",
                 overView = "Описание товара...",
                 price = 5000,
@@ -64,7 +81,7 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 2,
-                imageURl = 0,
+                imageURl = R.drawable.img_1,
                 label = "Худи",
                 overView = "Описание товара...",
                 price = 2000,
@@ -72,7 +89,7 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 3,
-                imageURl = 0,
+                imageURl = R.drawable.img_2,
                 label = "Джинсы",
                 overView = "Описание товара...",
                 price = 3000,
@@ -80,7 +97,23 @@ class RepositoryImpl @Inject constructor() : Repository {
             ),
             Product(
                 id = 4,
-                imageURl = 0,
+                imageURl = R.drawable.img_3,
+                label = "Футболка",
+                overView = "Описание товара...",
+                price = 1000,
+                size = Size.L
+            ),
+            Product(
+                id = 5,
+                imageURl = R.drawable.img_4,
+                label = "Футболка",
+                overView = "Описание товара...",
+                price = 1000,
+                size = Size.L
+            ),
+            Product(
+                id = 6,
+                imageURl = R.drawable.img_5,
                 label = "Футболка",
                 overView = "Описание товара...",
                 price = 1000,
