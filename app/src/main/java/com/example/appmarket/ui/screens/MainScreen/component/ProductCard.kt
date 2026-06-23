@@ -1,4 +1,4 @@
-package com.example.appmarket
+package com.example.appmarket.ui.screens.MainScreen.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -34,13 +34,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.appmarket.R
+import com.example.appmarket.model.Product
+import com.example.appmarket.model.Size
 
 
 @Composable
-fun ProductCardContent(
-    modifier: Modifier = Modifier
+fun ProductCard(
+    modifier: Modifier = Modifier,
+    product: Product,
+    onAddToCart:  (Product) -> Unit
 ) {
-    var selectedSize by remember { mutableStateOf<String?>(null) }
+    var selectedSize by remember { mutableStateOf<String?>(product.size.name) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -58,11 +63,11 @@ fun ProductCardContent(
                 shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(15.dp),
-                border = BorderStroke(1.dp, color = Color.Gray)
+                border = BorderStroke(1.dp, color = Color.LightGray.copy(alpha = 0.5f))
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.img),
-                    contentDescription = " ",
+                    contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
@@ -70,13 +75,14 @@ fun ProductCardContent(
                 )
             }
 
-            Text(text = "Navy KROOKED sweater", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(text =product.label, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Text(
-                text = "Hand-woven 100% cotton KROOKED rugby jearsey in baby blue/navy retro colour way.",
-                color = Color.Gray
+                text = product.overView,
+                color = Color.Gray,
+                maxLines = 2
             )
             Text(
-                text = "R 1,750",
+                text = "R ${product.price}",
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp
             )
@@ -103,7 +109,8 @@ fun ProductCardContent(
                 Box(
                     modifier = Modifier
                         .size(50.dp)
-                        .background(Color(0xFF565555), CircleShape),
+                        .background(Color(0xFF565555), CircleShape)
+                        .clickable{onAddToCart(product)},
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
@@ -120,13 +127,21 @@ fun ProductCardContent(
 
 @Preview(showBackground = true, backgroundColor = 0xFF808080)
 @Composable
-fun ProductCard(
-
+fun ProductCardPreview(
 ) {
+    val dummyProduct = Product(
+        id = 1,
+        imageURl = R.drawable.img, // Убедись, что картинка с таким именем есть в drawable
+        label = "Navy KROOKED sweater",
+        overView = "Hand-woven 100% cotton KROOKED rugby jearsey in baby blue/navy retro colour way.",
+        price = 1750,
+        size = Size.M
+    )
+
     Box(
         modifier = Modifier.padding(16.dp)
     ) {
-        ProductCardContent()
+        ProductCard(product = dummyProduct, onAddToCart = {})
     }
 }
 

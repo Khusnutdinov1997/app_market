@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.example.appmarket.ui.screens.MainScreen.MainScreen
 import com.example.appmarket.ui.screens.cartScreen.CartScreen
 import com.example.appmarket.ui.theme.AppMarketTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppMarketTheme {
-                CartScreen()
+                MainScreen()
             }
         }
     }
