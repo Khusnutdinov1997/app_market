@@ -12,7 +12,11 @@ import androidx.compose.ui.unit.dp
 import com.example.appmarket.R
 
 @Composable
-fun CategoryGrid() {
+fun CategoryGrid(
+    onHomeClick: () -> Unit,
+    onSearchClick: () -> Unit,
+    onCartClick: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -23,23 +27,27 @@ fun CategoryGrid() {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CategoryItem(iconRes = R.drawable.ic_home)
-            CategoryItem(iconRes = R.drawable.ic_search)
-            CategoryItem(iconRes = R.drawable.my_icon_card)
+            CategoryItem(iconRes = R.drawable.ic_home, onClick = onHomeClick)
+            CategoryItem(iconRes = R.drawable.ic_search, onClick = onSearchClick)
+            CategoryItem(iconRes = R.drawable.my_icon_card, onClick = onCartClick)
         }
 
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CategoryItem(iconRes = R.drawable.ic_belt)
-            CategoryItem(iconRes = R.drawable.ic_trousers)
-            CategoryItem(iconRes = R.drawable.ic_shoes)
+            CategoryItem(iconRes = R.drawable.ic_belt, onClick ={})
+            CategoryItem(iconRes = R.drawable.ic_trousers, onClick = {  })
+            CategoryItem(iconRes = R.drawable.ic_shoes, onClick = {  })
         }
     }
 }
 @Preview(showBackground = true)
 @Composable
 fun CategoryGridPreview() {
-    CategoryGrid()
+    CategoryGrid(
+        onHomeClick = {},
+        onSearchClick = {},
+        onCartClick = {}
+    )
 }

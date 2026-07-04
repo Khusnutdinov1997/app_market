@@ -14,9 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.example.appmarket.R
 import com.example.appmarket.model.Product
 import com.example.appmarket.model.Size
+import com.example.appmarket.ui.screens.Screens
 import com.example.appmarket.ui.screens.MainScreen.component.BannerComponent
 import com.example.appmarket.ui.screens.MainScreen.component.CategoryGrid
 import com.example.appmarket.ui.screens.MainScreen.component.MainTopBar
@@ -26,24 +28,37 @@ import com.example.appmarket.viewModel.CartViewModel
 
 @Composable
 fun MainScreen(
+    navController: NavController,
     viewModel: CartViewModel = hiltViewModel()
 ) {
     val products by viewModel.products.collectAsState(initial = emptyList())
 
     MainScreenContent(
         products = products,
-        onAddToCart = {product -> viewModel.addToCart(product.id)}
+        onProductClick = { id ->
+            navController.navigate(Screens.ProductDetail.passId(id))
+        },
+        onHomeClick = {
+            navController.navigate(Screens.MainScreen.route)
+        },
+        onSearchClick = {},
+        onCartClick = {
+            navController.navigate(Screens.CartScreen.route)
+        }
     )
 }
 
 @Composable
 fun MainScreenContent(
     products: List<Product>,
-    onAddToCart: (Product) -> Unit
+    onProductClick: (Int) -> Unit,
+    onHomeClick: () -> Unit,
+    onSearchClick: () -> Unit,
+    onCartClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            MainTopBar()
+            MainTopBar(onCartClick = onCartClick)
         }
     ) { paddingValues ->
 
@@ -58,7 +73,7 @@ fun MainScreenContent(
                 SectionHeader(title = "New arrivals")
                 RowList(
                     products = products,
-                    onProductClick = {id -> print("переход к товару по ID: $id")}
+                    onProductClick = onProductClick
                 )
             }
 
@@ -69,14 +84,18 @@ fun MainScreenContent(
 
             item {
                 SectionHeader(title = "Shop by category")
-                CategoryGrid()
+                CategoryGrid(
+                    onHomeClick = onHomeClick,
+                    onSearchClick = onSearchClick,
+                    onCartClick = onCartClick
+                    )
             }
 
             item {
                 SectionHeader(title = "Best sellers")
                 RowList(
                     products = products,
-                    onProductClick = {id -> print("переход к товару по ID: $id")}
+                    onProductClick = onProductClick
                 )
             }
 
@@ -92,21 +111,34 @@ fun MainScreenContent(
 @Composable
 fun MainScreenPreview() {
     val dummyProducts = listOf(
-        Product(1, R.drawable.img, "Navy KROOKED", "Description", 1750,
-            Size.M),
-        Product(2, R.drawable.img_1, "Grey Sweater", "Description", 1200,
-            Size.L),
-        Product(3, R.drawable.img_2, "Navy KROOKED", "Description", 1750,
-            Size.M),
-        Product(4, R.drawable.img_3, "Navy KROOKED", "Description", 1750,
-            Size.M),
-        Product(5, R.drawable.img_4, "Navy KROOKED", "Description", 1750,
-            Size.M),
+        Product(
+            1, R.drawable.img, "Navy KROOKED", "Description", 1750,
+            Size.M
+        ),
+        Product(
+            2, R.drawable.img_1, "Grey Sweater", "Description", 1200,
+            Size.L
+        ),
+        Product(
+            3, R.drawable.img_2, "Navy KROOKED", "Description", 1750,
+            Size.M
+        ),
+        Product(
+            4, R.drawable.img_3, "Navy KROOKED", "Description", 1750,
+            Size.M
+        ),
+        Product(
+            5, R.drawable.img_4, "Navy KROOKED", "Description", 1750,
+            Size.M
+        ),
     )
-    MaterialTheme{
+    MaterialTheme {
         MainScreenContent(
             products = dummyProducts,
-            onAddToCart = {}
+            onProductClick = {},
+            onHomeClick = {},
+            onSearchClick = {},
+            onCartClick = {},
         )
     }
 }

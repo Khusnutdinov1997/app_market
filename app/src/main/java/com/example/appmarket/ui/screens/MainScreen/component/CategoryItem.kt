@@ -21,7 +21,7 @@ import com.example.appmarket.R
 fun CategoryItem(
     iconRes: Int,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Card(
         modifier = modifier

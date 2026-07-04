@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.appmarket.ui.screens.MainScreen.MainScreen
-import com.example.appmarket.ui.screens.cartScreen.CartScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.appmarket.navigation.NavGraph
 import com.example.appmarket.ui.theme.AppMarketTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,7 +16,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AppMarketTheme {
-                MainScreen()
+                val navController = rememberNavController()
+                NavGraph(navController = navController)
             }
         }
     }
