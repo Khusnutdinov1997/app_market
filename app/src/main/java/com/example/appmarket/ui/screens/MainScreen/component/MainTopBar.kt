@@ -1,8 +1,6 @@
 package com.example.appmarket.ui.screens.MainScreen.component
 
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -11,11 +9,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.appmarket.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainTopBar() {
+fun MainTopBar(
+    onCartClick: () -> Unit
+) {
     CenterAlignedTopAppBar(
         title = {
             Text(
@@ -25,13 +28,13 @@ fun MainTopBar() {
             )
         },
         actions = {
-            IconButton(onClick = { TODO() }) {
+            IconButton(onClick = onCartClick) {
                 Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = null
+                    painter = painterResource(id = R.drawable.my_icon_card),
+                    contentDescription = "Cart",
+                    modifier = Modifier.size(24.dp)
                 )
             }
-        },
-        modifier = Modifier.statusBarsPadding()
+        }
     )
 }
